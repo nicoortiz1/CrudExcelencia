@@ -78,13 +78,13 @@ namespace CrudExcelencia.Controllers
                     connection.Open();
                     command.ExecuteNonQuery();
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Inicio");
             }
             return View(paciente);
         }
 
         // EDITAR - GET
-        public ActionResult Edit(int id)
+        public ActionResult Editar(int id)
         {
             Paciente paciente = ObtenerPacientePorId(id);
             if (paciente == null) return HttpNotFound();
@@ -93,7 +93,7 @@ namespace CrudExcelencia.Controllers
 
         // EDITAR - POST
         [HttpPost]
-        public ActionResult Edit(Paciente paciente)
+        public ActionResult Editar(Paciente paciente)
         {
             if (ModelState.IsValid)
             {
@@ -113,13 +113,13 @@ namespace CrudExcelencia.Controllers
                     connection.Open();
                     command.ExecuteNonQuery();
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Inicio");
             }
             return View(paciente);
         }
 
         // ELIMINAR - GET
-        public ActionResult Delete(int id)
+        public ActionResult Eliminar(int id)
         {
             Paciente paciente = ObtenerPacientePorId(id);
             if (paciente == null) return HttpNotFound();
@@ -127,10 +127,10 @@ namespace CrudExcelencia.Controllers
         }
 
         // ELIMINAR - POST
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        [HttpPost]
+        public ActionResult ConfirmarEliminacion(int id)
         {
-            string sql = "DELETE FROM Pacientes WHERE Id = @Id";
+            string sql = "DELETE FROM Paciente WHERE Id = @Id";
             using (MySqlConnection connection = new MySqlConnection(_connectionString))
             using (MySqlCommand command = new MySqlCommand(sql, connection))
             {
@@ -147,7 +147,7 @@ namespace CrudExcelencia.Controllers
                     TempData["MensajeError"] = "Paciente no encontrado.";
                 }
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Inicio");
         }
 
         // MÉTODO AUXILIAR PARA OBTENER UN PACIENTE POR ID

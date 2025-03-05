@@ -1,65 +1,113 @@
 ﻿@model CrudExcelencia.Models.Paciente
 
 @{
-    ViewBag.Title = "Crear";
+    ViewBag.Title = "Crear Paciente";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (TempData["MensajeExito"] != null)
-{
-    <div class="alert alert-success">@TempData["MensajeExito"]</div>
-}
+<style>
+    .form-container {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    }
 
-@if (TempData["MensajeError"] != null)
-{
-    <div class="alert alert-danger">@TempData["MensajeError"]</div>
-}
+    .form-title {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+    }
 
-<div class="row" style="margin-top:30px">
-    <div class="col-sm-12">
-        <div class="panel panel-warning">
-            <div class="panel-heading">
-                <h4>Crear paciente</h4>
+    .btn-custom {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+    }
+</style>
+
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="form-container">
+        @if (TempData["MensajeExito"] != null)
+        {
+            <div class="alert alert-success text-center">
+                @TempData["MensajeExito"]
             </div>
-            <div class="panel-body
-">
-                <form action="@Url.Action("Create", "Pacientes")" method="post">
-                    @Html.AntiForgeryToken()
-                    <div class="form-group
-">
-                        <label>Nombres</label>
-                        <input type="text" class="form-control" name="Nombres" />
-                    </div>
-                    <div class="form-group
-">
-                        <label>Apellidos</label>
-                        <input type="text" class="form-control" name="Apellidos" />
-                    </div>
-                    <div class="form-group
-">
-                        <label>DNI</label>
-                        <input type="number" class="form-control" name="DNI" />
-                    </div>
-                    <div class="form-group
-">
-                        <label>Fecha Nacimiento</label>
-                        <input type="date" class="form-control" name="FechaNacimiento" />
-
-                    </div>
-                    <div class="form-group
-">
-                        <label>Telefono</label>
-                        <input type="text" class="form-control" name="Telefono" />
-                    </div>
-                    <div class="form-group
-">
-                        <label>Correo</label>
-                        <input type="email" class="form-control" name="Correo" />
-                    </div>
-                    <button type="submit" class="btn btn-primary">Crear</button>
-                    <a class="btn btn-warning" href="@Url.Action("Inicio", "Pacientes")">Volver</a>
-                </form>
+        }
+        @if (TempData["MensajeError"] != null)
+        {
+            <div class="alert alert-danger text-center">
+                @TempData["MensajeError"]
             </div>
-        </div>
+        }
+
+        <h3 class="form-title">Crear Paciente</h3>
+
+        <form action="@Url.Action("Create", "Pacientes")" method="post">
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Nombre">Nombres</label>
+                        <input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="Ingrese los nombres" required />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Apellido">Apellidos</label>
+                        <input type="text" class="form-control" id="Apellido" name="Apellido" placeholder="Ingrese los apellidos" required />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="DNI">DNI</label>
+                        <input type="number" class="form-control" id="DNI" name="DNI" placeholder="Ingrese el DNI" required />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="FechaNacimiento">Fecha de Nacimiento</label>
+                        <input type="date" class="form-control" id="FechaNacimiento" name="FechaNacimiento" required />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Telefono">Teléfono</label>
+                        <input type="text" class="form-control" id="Telefono" name="Telefono" placeholder="Ingrese el teléfono" required />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Email">Email</label>
+                        <input type="email" class="form-control" id="Email" name="Email" placeholder="Ingrese el email" required />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="Direccion">Dirección</label>
+                <input type="text" class="form-control" id="Direccion" name="Direccion" placeholder="Ingrese la dirección" required />
+            </div>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary btn-custom">
+                    <i class="glyphicon glyphicon-ok"></i> Crear Paciente
+                </button>
+                <a class="btn btn-warning btn-custom mt-2" href="@Url.Action("Inicio", "Pacientes")">
+                    <i class="glyphicon glyphicon-arrow-left"></i> Volver
+                </a>
+            </div>
+        </form>
     </div>
 </div>

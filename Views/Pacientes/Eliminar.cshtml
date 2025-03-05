@@ -1,0 +1,50 @@
+﻿@model CrudExcelencia.Models.Paciente
+
+@{
+    ViewBag.Title = "Eliminar Paciente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" style="margin-top:30px;">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            @if (TempData["MensajeExito"] != null)
+            {
+                <div class="alert alert-success">
+                    @TempData["MensajeExito"]
+                </div>
+            }
+            @if (TempData["MensajeError"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["MensajeError"]
+                </div>
+            }
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Eliminar Paciente</h3>
+                </div>
+                <div class="panel-body">
+                    <p>¿Está seguro que desea eliminar el siguiente paciente?</p>
+                    <dl class="dl-horizontal">
+                        <dt>Nombre:</dt>
+                        <dd>@Model.Nombre</dd>
+                        <dt>Apellido:</dt>
+                        <dd>@Model.Apellido</dd>
+                        <dt>DNI:</dt>
+                        <dd>@Model.DNI</dd>
+                    </dl>
+                    @using (Html.BeginForm("ConfirmarEliminacion", "Pacientes", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.Id)
+                        <div class="form-group">
+                            <input type="submit" value="Confirmar Eliminación" class="btn btn-danger" />
+                            @Html.ActionLink("Cancelar", "Inicio", "Pacientes", null, new { @class = "btn btn-default" })
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

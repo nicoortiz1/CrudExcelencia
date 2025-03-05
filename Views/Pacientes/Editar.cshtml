@@ -1,64 +1,99 @@
 ﻿@model CrudExcelencia.Models.Paciente
 
 @{
-    ViewBag.Title = "Editar";
+    ViewBag.Title = "Editar Paciente";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (TempData["MensajeExito"] != null)
-{
-    <div class="alert alert-success">@TempData["MensajeExito"]</div>
-}
+<style>
+    .form-container {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    }
 
-@if (TempData["MensajeError"] != null)
-{
-    <div class="alert alert-danger">@TempData["MensajeError"]</div>
-}
+    .form-title {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+    }
 
-<div class="row" style="margin-top:30px">
-    <div class="col-sm-12">
-        <div class="panel panel-warning">
-            <div class="panel-heading">
-                <h4>Editar paciente</h4>
+    .btn-custom {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+    }
+</style>
+
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="form-container">
+        @if (TempData["MensajeExito"] != null)
+        {
+            <div class="alert alert-success text-center">@TempData["MensajeExito"]</div>
+        }
+        @if (TempData["MensajeError"] != null)
+        {
+            <div class="alert alert-danger text-center">@TempData["MensajeError"]</div>
+        }
+
+        <h3 class="form-title text-center">Editar Paciente</h3>
+
+        <form action="@Url.Action("Editar", "Pacientes")" method="post">
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="row">
+                <!-- Primera columna -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Nombre">Nombres</label>
+                        <input type="text" class="form-control" id="Nombre" name="Nombre" value="@Model.Nombre" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="Apellido">Apellidos</label>
+                        <input type="text" class="form-control" id="Apellido" name="Apellido" value="@Model.Apellido" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="DNI">DNI</label>
+                        <input type="number" class="form-control" id="DNI" name="DNI" value="@Model.DNI" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="FechaNacimiento">Fecha de Nacimiento</label>
+                        <input type="date" class="form-control" id="FechaNacimiento" name="FechaNacimiento" value="@Model.FechaNacimiento.ToString("yyyy-MM-dd")" required />
+                    </div>
+                </div>
+
+                <!-- Segunda columna -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Telefono">Teléfono</label>
+                        <input type="text" class="form-control" id="Telefono" name="Telefono" value="@Model.Telefono" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="Email">Email</label>
+                        <input type="email" class="form-control" id="Email" name="Email" value="@Model.Email" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="Direccion">Dirección</label>
+                        <input type="text" class="form-control" id="Direccion" name="Direccion" value="@Model.Direccion" required />
+                    </div>
+                </div>
             </div>
-            <div class="panel-body">
-                <form action="@Url.Action("Editar", "Pacientes")" method="post">
-                    @Html.AntiForgeryToken()
-                    <input type="hidden" name="Id" value="@Model.Id" />
-                    <div class="form-group
-">
-                        <label>Nombres</label>
-                        <input type="text" class="form-control" name="Nombres" value="@Model.Nombre" />
-                    </div>
-                    <div class="form-group
-">
-                        <label>Apellidos</label>
-                        <input type="text" class="form-control" name="Apellidos" value="@Model.Apellido" />
-                    </div>
-                    <div class="form-group
-">
-                        <label>DNI</label>
-                        <input type="number" class="form-control" name="DNI" value="@Model.DNI" />
-                    </div>
-                    <div class="form-group
-">
-                        <label>Fecha Nacimiento</label>
-                        <input type="date" class="form-control" name="FechaNacimiento" value="@Model.FechaNacimiento" />
-                    </div>
-                    <div class="form-group
-">
-                        <label>Telefono</label>
-                        <input type="text" class="form-control" name="Telefono" value="@Model.Telefono" />
-                    </div>
-                    <div class="form-group
-">
-                        <label>Correo</label>
-                        <input type="email" class="form-control" name="Correo" value="@Model.Email" />
-                    </div>
-                    <button type="submit" class="btn btn-primary">Editar</button>
-                    <a class="btn btn-warning" href="@Url.Action("Inicio", "Pacientes")">Volver</a>
-                </form>
+
+            <!-- Botones -->
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">
+                    <i class="glyphicon glyphicon-floppy-disk"></i> Guardar Cambios
+                </button>
+                <a href="@Url.Action("Inicio", "Pacientes")" class="btn btn-secondary">
+                    <i class="glyphicon glyphicon-remove"></i> Cancelar
+                </a>
             </div>
-        </div>
+        </form>
     </div>
 </div>
