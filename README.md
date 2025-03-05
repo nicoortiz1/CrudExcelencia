@@ -58,7 +58,7 @@ CrudExcelencia es una aplicación CRUD desarrollada en **ASP.NET MVC** con el ob
 
 ### 1. Clonar el Repositorio
 
-git clone https://github.com/tuusuario/CrudExcelencia.git
+https://github.com/nicoortiz1/CrudExcelencia.git
 
 ### 2. Crear la base de datos
 
